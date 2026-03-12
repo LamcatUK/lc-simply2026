@@ -1,0 +1,51 @@
+footer {
+  background-color: color-mix(
+    in srgb,
+    var(--col-brand-navy),
+    var(--col-black) 70%
+  );
+  color: var(--col-white);
+
+  a {
+    color: var(--col-white);
+    &:hover {
+      color: var(--col-accent-orange);
+      opacity: 1;
+    }
+  }
+
+  .footer__logo {
+    max-width: 195px;
+  }
+
+  ul.menu {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+  ul.fa-ul {
+    margin-left: 1.5rem;
+  }
+
+  .fa-solid,
+  .fa-brands {
+    color: var(--col-accent-orange);
+  }
+
+  .social-icons {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  .colophon {
+    background-color: color-mix(
+      in srgb,
+      var(--col-brand-navy),
+      var(--col-black) 80%
+    );
+    font-size: var(--fs-200);
+    color: #ffffffcc;
+    a {
+      opacity: 0.8;
+    }
+  }
+}

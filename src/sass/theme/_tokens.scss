@@ -1,0 +1,123 @@
+$col-primary: #00a0de;
+$col-dark: #00487c;
+$col-darkest: #0d0630;
+$col-highlight: #53dd6c;
+$col-grey: #fff0f0;
+
+:root {
+  /* colours (cleaned) */
+  --col-white: rgb(255, 255, 255);
+  --col-black: #2e2e2e;
+
+  --col-green-primary: #7f9b89;
+  --col-green-muted: #8fa89a;
+
+  --col-neutral-light: #faf7f4;
+  --col-neutral-muted: #f2eeec;
+
+  /* font families */
+  --ff-heading: Inter, sans-serif, serif;
+  --ff-body: Inter, sans-serif, serif;
+
+  /* =========================
+     Font weights
+  ========================== */
+
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  /* =========================
+     Fluid type scale
+     (light-mode dominant site)
+  ========================== */
+
+  /* numbers */
+  --fs-1000: clamp(3.5rem, 7vw, 6rem);
+  --lh-1000: 1;
+
+  /* Hero H1 */
+  --fs-900: clamp(2.2rem, 4vw, 3.5rem);
+  --lh-900: 1.1;
+
+  /* Section H2 */
+  --fs-800: clamp(1.6rem, 2.5vw, 2.2rem);
+  --lh-800: 1.2;
+
+  /* Subheading / Large intro */
+  --fs-700: clamp(1.25rem, 1.6vw, 1.5rem);
+  --lh-700: 1.35;
+
+  /* Card titles / H3 */
+  --fs-600: clamp(1.1rem, 1.2vw, 1.25rem);
+  --lh-600: 1.35;
+
+  /* Body large */
+  --fs-500: clamp(1rem, 1vw, 1.125rem);
+  --lh-500: 1.6;
+
+  /* Body standard */
+  --fs-400: clamp(0.95rem, 0.9vw, 1rem);
+  --lh-400: 1.6;
+
+  /* Small text */
+  --fs-300: clamp(0.85rem, 0.8vw, 0.9rem);
+  --lh-300: 1.5;
+
+  /* Micro / meta / legal */
+  --fs-200: clamp(0.75rem, 0.7vw, 0.8rem);
+  --lh-200: 1.4;
+
+  /* =========================
+     Utility tracking
+  ========================== */
+
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.12em;
+
+  /* =========================
+     Role-based assignments
+  ========================== */
+
+  --font-h1-family: var(--ff-heading);
+  --font-h1-weight: var(--fw-regular);
+  --font-h1-size: var(--fs-900);
+  --font-h1-lineheight: var(--lh-900);
+
+  --font-h2-family: var(--ff-heading);
+  --font-h2-weight: var(--fw-regular);
+  --font-h2-size: var(--fs-800);
+  --font-h2-lineheight: var(--lh-800);
+
+  --font-h3-family: var(--ff-heading);
+  --font-h3-weight: var(--fw-regular);
+  --font-h3-size: var(--fs-600);
+  --font-h3-lineheight: var(--lh-600);
+
+  --font-body-family: var(--ff-body);
+  --font-body-weight: var(--fw-regular);
+  --font-body-size: var(--fs-400);
+  --font-body-lineheight: var(--lh-400);
+
+  --font-body-large-size: var(--fs-500);
+
+  --font-meta-size: var(--fs-300);
+  --font-meta-weight: var(--fw-semibold);
+
+  --radius-100: 8px;
+  --radius-200: 14px;
+  --radius-pill: 9999px;
+
+  --shadow-1:
+    rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  --shadow-2:
+    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+  --transition: 200ms ease-in;
+
+  --fa-li-margin: 1.5rem;
+
+  --h-top-mobile: 70px;
+  --h-top: 70px;
+}

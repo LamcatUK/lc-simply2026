@@ -1,0 +1,64 @@
+header {
+  background-color: transparent;
+
+  &.scrolled {
+    background-color: #ffffffe6;
+    backdrop-filter: blur(2px);
+    .navbar-brand.logo {
+      height: 80px;
+    }
+  }
+
+  font-family: var(--ff-heading);
+
+  .navbar-brand.logo {
+    background-image: url(../img/heatwell-logo.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    // height: 130px;
+    height: 100px;
+    // width: 170px;
+    width: 131px;
+    flex-shrink: 0;
+    transition:
+      height 0.3s linear,
+      width 0.3s linear;
+
+    @media (min-width: 1400px) {
+      width: 220px;
+    }
+  }
+
+  .navbar-nav {
+    @media (min-width: 992px) {
+      align-items: center;
+    }
+  }
+
+  .navbar-nav .nav-link {
+    color: var(--col-dark-900);
+    font-family: var(--ff-heading);
+    font-size: var(--fs-300);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+      color: var(--col-primary-700);
+    }
+  }
+
+  .navbar-nav .show > .nav-link,
+  .navbar-nav .current_page_item > .nav-link,
+  .navbar-nav .current_menu_item > .nav-link {
+    color: var(--col-dark-900);
+  }
+
+  .navbar-nav .dropdown-menu .dropdown-item {
+    color: var(--col-dark-900);
+    font-family: var(--ff-body);
+    font-weight: var(--fw-regular);
+  }
+}
