@@ -111,7 +111,7 @@ defined( 'ABSPATH' ) || exit;
 	<nav class="navbar navbar-expand-lg navbar-light" aria-label="Main Navigation">
 		<div class="container d-flex justify-content-between">
 			<a href="/" class="navbar-brand logo" aria-label="Simply Assist Homepage"></a>
-			<a href="#contact" class="button button-primary">Start a conversation</a>
+			<a href="#contact" class="button button-primary d-none d-md-inline-block">Start a conversation</a>
 		</div>
 	</nav>
 </header>

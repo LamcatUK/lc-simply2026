@@ -17,6 +17,7 @@ if ( $background ) {
 
 ?>
 <section id="<?php echo esc_attr( $block_id ); ?>" class="lc-hero">
+	<div class="overlay"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-10">
@@ -31,7 +32,7 @@ if ( $background ) {
 				}
 				if ( get_field( 'show_logos' ) ) {
 					++$stagger_index;
-					echo '<div class="hero-logos my-4 d-flex gap-4 align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="0" data-stagger-index="' . esc_attr( $stagger_index ) . '">';
+					echo '<div class="hero-logos my-4 d-flex justify-content-center justify-content-lg-start gap-4 align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="0" data-stagger-index="' . esc_attr( $stagger_index ) . '">';
 					echo lc_sanitise_svg( get_stylesheet_directory() . '/img/logos/xero.svg', 'hero-logos', 60, 50 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo lc_sanitise_svg( get_stylesheet_directory() . '/img/logos/intuit-quickbooks.svg', 'hero-logos', 250, 60 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo lc_sanitise_svg( get_stylesheet_directory() . '/img/logos/sage.svg', 'hero-logos', 150, 60 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
