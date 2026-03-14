@@ -1,0 +1,23 @@
+{
+  "key": "group_lc_text_image",
+  "title": "LC Text Image",
+  "fields": [
+    {
+      "key": "field_lc_text_image_title",
+      "label": "LC Text Image",
+      "name": "title",
+      "type": "message"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-text-image"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": ""
+}

@@ -1,0 +1,150 @@
+{
+  "key": "group_lc_packages",
+  "title": "LC Packages",
+  "fields": [
+    {
+      "key": "field_lc_packages_title",
+      "label": "LC Packages",
+      "name": "title",
+      "type": "message"
+    },
+    {
+      "key": "field_lc_packages_lc_packages_title_c45e0517",
+      "label": "Packages Title",
+      "name": "lc_packages_title",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_packages_lc_packages_intro_e4a3fe7f",
+      "label": "Packages Intro",
+      "name": "lc_packages_intro",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_packages_lc_packages_list_7374f8f9",
+      "label": "Packages List",
+      "name": "lc_packages_list",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "button_label": "Add Row",
+      "sub_fields": [
+        {
+          "key": "field_lc_packages_lc_packages_list_package_name_ca539532",
+          "label": "Package Name",
+          "name": "package_name",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_lc_packages_lc_packages_list_package_size_d6e7a714",
+          "label": "Package Size",
+          "name": "package_size",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_lc_packages_lc_packages_list_package_price_5b2cbfdb",
+          "label": "Package Price",
+          "name": "package_price",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_lc_packages_lc_packages_list_package_description_61bed602",
+          "label": "Package Description",
+          "name": "package_description",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "rows": 4,
+          "new_lines": "br"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-packages"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "modified": 1773498559
+}

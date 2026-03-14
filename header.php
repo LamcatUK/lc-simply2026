@@ -19,16 +19,13 @@ defined( 'ABSPATH' ) || exit;
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="preload"
-		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/inter-v20-latin-regular.woff2' ); ?>"
+		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/playfair-display-v40-latin-regular.woff2' ); ?>"
 		as="font" type="font/woff2" crossorigin="anonymous">
 	<link rel="preload"
-		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/inter-v20-latin-700.woff2' ); ?>"
+		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/source-sans-3-v19-latin-600.woff2' ); ?>"
 		as="font" type="font/woff2" crossorigin="anonymous">
 	<link rel="preload"
-		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/inter-v20-latin-600.woff2' ); ?>"
-		as="font" type="font/woff2" crossorigin="anonymous">
-	<link rel="preload"
-		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/inter-v20-latin-500.woff2' ); ?>"
+		href="<?= esc_url( get_stylesheet_directory_uri() . '/fonts/source-sans-3-v19-latin-regular.woff2' ); ?>"
 		as="font" type="font/woff2" crossorigin="anonymous">
 	<?php
 	if ( is_front_page() ) {
@@ -112,25 +109,9 @@ defined( 'ABSPATH' ) || exit;
 	?>
 <header id="wrapper-navbar" class="fixed-top" itemscope itemtype="http://schema.org/WebSite">
 	<nav class="navbar navbar-expand-lg navbar-light" aria-label="Main Navigation">
-		<div class="container">
-			<a href="/" class="navbar-brand logo" aria-label="Tidy Solutions Homepage"></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div id="navbar" class="collapse navbar-collapse">
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'primary_nav',
-						'container'      => false,
-						'menu_class'     => 'navbar-nav ms-auto gap-2 gap-lg-4 py-4 py-lg-0',
-						'fallback_cb'    => '',
-						'depth'          => 3,
-						'walker'         => new Understrap_WP_Bootstrap_Navwalker(),
-					)
-				);
-				?>
-			</div>
+		<div class="container d-flex justify-content-between">
+			<a href="/" class="navbar-brand logo" aria-label="Simply Assist Homepage"></a>
+			<a href="#contact" class="button button-primary">Start a conversation</a>
 		</div>
 	</nav>
 </header>

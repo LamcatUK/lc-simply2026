@@ -1,0 +1,35 @@
+.lc-packages {
+  background: var(--col-neutral-mid);
+  overflow: hidden;
+
+  .package-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 36px 28px;
+    height: 100%;
+    border-radius: var(--radius-100);
+    box-shadow: var(--shadow-1);
+  }
+  .package-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .package-hours {
+    font-size: 0.95rem;
+    color: #6b6b6b;
+    margin-bottom: 10px;
+  }
+  .package-price {
+    font-size: var(--fs-700);
+    color: var(--col-green-primary);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 16px;
+  }
+  .package-description {
+    line-height: 1.6;
+    color: var(--col-neutral-dark);
+  }
+  .package-card.featured {
+    border-color: var(--col-green-muted);
+  }
+}

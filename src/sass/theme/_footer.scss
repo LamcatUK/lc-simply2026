@@ -1,15 +1,15 @@
 footer {
   background-color: color-mix(
     in srgb,
-    var(--col-brand-navy),
-    var(--col-black) 70%
+    var(--col-neutral-light),
+    var(--col-black) 5%
   );
-  color: var(--col-white);
+  color: var(--col-black);
 
   a {
-    color: var(--col-white);
+    color: var(--col-black);
     &:hover {
-      color: var(--col-accent-orange);
+      color: var(--col-blackaccent-orange);
       opacity: 1;
     }
   }
@@ -28,7 +28,7 @@ footer {
 
   .fa-solid,
   .fa-brands {
-    color: var(--col-accent-orange);
+    color: var(--col-black);
   }
 
   .social-icons {
@@ -39,11 +39,11 @@ footer {
   .colophon {
     background-color: color-mix(
       in srgb,
-      var(--col-brand-navy),
-      var(--col-black) 80%
+      var(--col-neutral-light),
+      var(--col-black) 10%
     );
     font-size: var(--fs-200);
-    color: #ffffffcc;
+    color: #000000cc;
     a {
       opacity: 0.8;
     }

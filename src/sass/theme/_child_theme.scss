@@ -98,6 +98,7 @@ ul.no-indent {
 
 a {
   text-decoration: none;
+  color: var(--col-green-primary);
 }
 
 .social_icons {
@@ -105,20 +106,23 @@ a {
   justify-content: center;
   flex-wrap: wrap;
   a {
-    color: var(--col-blue-400);
+    color: var(--col-green-primary);
     width: 40px;
     height: 40px;
     display: grid;
     place-content: center;
     transition: color var(--transition);
     &:hover {
-      color: var(--col-blue-900);
+      color: var(--col-green-muted);
     }
   }
 }
 
-.rounded-lg {
-  border-radius: var(--radius-lg);
+.rounded-100 {
+  border-radius: var(--radius-100);
+}
+.rounded-200 {
+  border-radius: var(--radius-200);
 }
 
 .buffer-top,
@@ -141,6 +145,13 @@ a {
 
 .wp-block-column.is-layout-flow > p {
   margin-top: 0;
+}
+
+.ds-active {
+  box-shadow: var(--shadow-1);
+}
+.ds-inactive {
+  box-shadow: var(--shadow-2);
 }
 
 // show stuff that overflows horizontally

@@ -1,0 +1,23 @@
+{
+  "key": "group_lc_highlight_card",
+  "title": "LC Highlight Card",
+  "fields": [
+    {
+      "key": "field_lc_highlight_card_title",
+      "label": "LC Highlight Card",
+      "name": "title",
+      "type": "message"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-highlight-card"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": ""
+}

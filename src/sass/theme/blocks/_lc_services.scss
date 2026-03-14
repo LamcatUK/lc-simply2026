@@ -1,0 +1,41 @@
+.lc-services {
+  .service-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    // background-color: #f9f9f9;
+    // border-radius: 8px;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+
+    // &:hover {
+    //   transform: translateY(-5px);
+    //   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    // }
+
+    .service-icon {
+      display: block;
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
+      color: var(--col-primary-600);
+    }
+
+    .service-icon,
+    .service-icon * {
+      fill: var(--col-green-muted);
+    }
+
+    .service-title {
+      font-family: var(--ff-body);
+      font-size: var(--fs-600);
+      margin-bottom: 10px;
+    }
+
+    .service-description {
+      font-size: var(--fs-400);
+      color: var(--col-neutral-dark);
+    }
+  }
+}

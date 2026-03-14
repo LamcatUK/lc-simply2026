@@ -1,0 +1,78 @@
+{
+  "key": "group_lc_hero",
+  "title": "LC Hero",
+  "fields": [
+    {
+      "key": "field_lc_hero_title",
+      "label": "LC Hero",
+      "name": "title",
+      "type": "message"
+    },
+    {
+      "key": "field_lc_hero_lc_hero_title_e9b251be",
+      "label": "Lc Hero Title",
+      "name": "lc_hero_title",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_hero_lc_hero_intro_3230382d",
+      "label": "Lc Hero Intro",
+      "name": "lc_hero_intro",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_hero_lc_hero_button_5e782853",
+      "label": "Lc Hero Button",
+      "name": "lc_hero_button",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-hero"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "modified": 1773342510
+}

@@ -1,0 +1,114 @@
+{
+  "key": "group_lc_how_steps",
+  "title": "LC How Steps",
+  "fields": [
+    {
+      "key": "field_lc_how_steps_title",
+      "label": "LC How Steps",
+      "name": "title",
+      "type": "message"
+    },
+    {
+      "key": "field_lc_how_steps_lc_how_steps_title_788b9ea4",
+      "label": "How Steps Title",
+      "name": "lc_how_steps_title",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_how_steps_lc_how_steps_intro_d1971a47",
+      "label": "How Steps Intro",
+      "name": "lc_how_steps_intro",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_how_steps_lc_how_steps_list_decd38e7",
+      "label": "How Steps List",
+      "name": "lc_how_steps_list",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layout": "block",
+      "button_label": "Add Row",
+      "sub_fields": [
+        {
+          "key": "field_lc_how_steps_lc_how_steps_list_step_title_07bb60ed",
+          "label": "Step Title",
+          "name": "step_title",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+        },
+        {
+          "key": "field_lc_how_steps_lc_how_steps_list_step_description_26fb8e21",
+          "label": "Step Description",
+          "name": "step_description",
+          "type": "textarea",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "rows": 4,
+          "new_lines": "br"
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-how-steps"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "modified": 1773428165
+}

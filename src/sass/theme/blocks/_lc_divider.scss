@@ -1,0 +1,26 @@
+.lc-divider {
+  .lc-divider__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lc-divider__inner::before,
+  .lc-divider__inner::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid currentColor;
+    opacity: 0.35;
+  }
+
+  .lc-divider__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .lc-divider__icon svg {
+    display: block;
+  }
+}

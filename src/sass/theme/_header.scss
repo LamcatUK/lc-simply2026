@@ -1,25 +1,24 @@
 header {
   background-color: transparent;
+  transition:
+    background-color var(--transition),
+    backdrop-filter var(--transition);
 
   &.scrolled {
     background-color: #ffffffe6;
     backdrop-filter: blur(2px);
-    .navbar-brand.logo {
-      height: 80px;
-    }
   }
 
   font-family: var(--ff-heading);
 
   .navbar-brand.logo {
-    background-image: url(../img/heatwell-logo.png);
+    background-image: url(../img/simply-assist-logo.svg);
     background-position: center left;
     background-repeat: no-repeat;
     background-size: contain;
-    // height: 130px;
-    height: 100px;
-    // width: 170px;
-    width: 131px;
+    // 268.14 57.54
+    height: 58px;
+    width: 268px;
     flex-shrink: 0;
     transition:
       height 0.3s linear,

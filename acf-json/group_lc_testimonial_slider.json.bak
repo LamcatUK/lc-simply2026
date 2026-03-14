@@ -1,0 +1,23 @@
+{
+  "key": "group_lc_testimonial_slider",
+  "title": "LC Testimonial Slider",
+  "fields": [
+    {
+      "key": "field_lc_testimonial_slider_title",
+      "label": "LC Testimonial Slider",
+      "name": "title",
+      "type": "message"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-testimonial-slider"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": ""
+}

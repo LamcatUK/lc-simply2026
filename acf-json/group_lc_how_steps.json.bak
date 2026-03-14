@@ -1,0 +1,23 @@
+{
+  "key": "group_lc_how_steps",
+  "title": "LC How Steps",
+  "fields": [
+    {
+      "key": "field_lc_how_steps_title",
+      "label": "LC How Steps",
+      "name": "title",
+      "type": "message"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-how-steps"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": ""
+}

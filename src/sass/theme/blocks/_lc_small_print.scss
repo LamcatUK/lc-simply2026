@@ -1,0 +1,29 @@
+.lc-small-print {
+  &__card {
+    background-color: var(--col-white);
+    border-radius: var(--radius-100);
+    border-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 1rem 1.5rem;
+  }
+  &__title {
+    font-size: var(--fs-500);
+    font-family: var(--ff-body);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 0.5rem;
+  }
+  &__description {
+    font-size: var(--fs-300);
+    color: var(--col-neutral-dark);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
+  }
+
+  &__description > span + span::before {
+    content: "•";
+    margin-right: 0.75rem;
+    opacity: 0.6;
+  }
+}

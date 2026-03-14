@@ -1,10 +1,34 @@
 // Add your custom JS here.
 import Collapse from "bootstrap/js/dist/collapse";
 
+var applyResponsiveAosStagger = function () {
+  var cards = document.querySelectorAll("[data-aos][data-stagger-index]");
+
+  if (!cards.length) return;
+
+  var isMobile = window.matchMedia("(max-width: 767.98px)").matches;
+
+  cards.forEach(function (card) {
+    var staggerIndex = Number(card.getAttribute("data-stagger-index") || 0);
+    var delay = isMobile ? 0 : 150 * staggerIndex;
+    card.setAttribute("data-aos-delay", String(delay));
+  });
+};
+
+applyResponsiveAosStagger();
+
 AOS.init({
   easing: "ease-out",
   once: true,
   duration: 500,
+});
+
+window.addEventListener("resize", function () {
+  applyResponsiveAosStagger();
+
+  if (typeof AOS !== "undefined" && typeof AOS.refreshHard === "function") {
+    AOS.refreshHard();
+  }
 });
 
 // Add background to navbar on scroll

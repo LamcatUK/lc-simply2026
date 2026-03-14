@@ -35,6 +35,325 @@ function split_lines( $content ) {
 	return $content;
 }
 
+/**
+ * Load, augment, and sanitize an SVG from attachment ID or local file path.
+ *
+ * @param int|string   $svg_source Attachment ID or local SVG file path/URL.
+ * @param string|array $classes    Optional CSS class or classes to add to the root SVG element.
+ * @param string|int   $width      Optional width attribute for the root SVG element.
+ * @param string|int   $height     Optional height attribute for the root SVG element.
+ * @return string Sanitized SVG markup, or an empty string if unavailable.
+ */
+function lc_sanitise_svg( $svg_source, $classes = '', $width = '', $height = '' ) {
+	$is_dimension = static function ( $value ) {
+		if ( ! is_scalar( $value ) ) {
+			return false;
+		}
+
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
+			return false;
+		}
+
+		return 1 === preg_match( '/^\d+(?:\.\d+)?(?:px|em|rem|%|vh|vw|vmin|vmax|pt|pc|cm|mm|in)?$/i', $value );
+	};
+
+	$sanitize_dimension = static function ( $value ) {
+		if ( ! is_scalar( $value ) ) {
+			return '';
+		}
+
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
+			return '';
+		}
+
+		if ( 1 === preg_match( '/^\d+(?:\.\d+)?(?:px|em|rem|%|vh|vw|vmin|vmax|pt|pc|cm|mm|in)?$/i', $value ) ) {
+			return $value;
+		}
+
+		return '';
+	};
+
+	// Support shorthand calls without classes.
+	// Numeric values in the classes position are treated as width and height.
+	if ( ! is_array( $classes ) && $is_dimension( $classes ) ) {
+		if ( '' === $width && '' === $height ) {
+			$width   = $classes;
+			$classes = '';
+		} elseif ( '' === $height && $is_dimension( $width ) ) {
+			$height  = $width;
+			$width   = $classes;
+			$classes = '';
+		}
+	}
+
+	$width  = $sanitize_dimension( $width );
+	$height = $sanitize_dimension( $height );
+
+	if ( empty( $svg_source ) ) {
+		return '';
+	}
+
+	$file_path = '';
+
+	if ( is_numeric( $svg_source ) ) {
+		$attachment_id = (int) $svg_source;
+
+		if ( 'image/svg+xml' !== get_post_mime_type( $attachment_id ) ) {
+			return '';
+		}
+
+		$file_path = get_attached_file( $attachment_id );
+	} elseif ( is_string( $svg_source ) ) {
+		$file_path = trim( $svg_source );
+
+		$theme_uri = get_stylesheet_directory_uri();
+		if ( 0 === strpos( $file_path, $theme_uri ) ) {
+			$file_path = get_stylesheet_directory() . substr( $file_path, strlen( $theme_uri ) );
+		}
+
+		$parent_theme_uri = get_template_directory_uri();
+		if ( 0 === strpos( $file_path, $parent_theme_uri ) ) {
+			$file_path = get_template_directory() . substr( $file_path, strlen( $parent_theme_uri ) );
+		}
+
+		if ( ! preg_match( '#^([a-zA-Z]:[\\/]|/)#', $file_path ) ) {
+			$theme_relative = ltrim( $file_path, '/\\' );
+			$child_path     = trailingslashit( get_stylesheet_directory() ) . $theme_relative;
+			$parent_path    = trailingslashit( get_template_directory() ) . $theme_relative;
+
+			if ( file_exists( $child_path ) ) {
+				$file_path = $child_path;
+			} elseif ( file_exists( $parent_path ) ) {
+				$file_path = $parent_path;
+			}
+		}
+
+		if ( 'svg' !== strtolower( (string) pathinfo( $file_path, PATHINFO_EXTENSION ) ) ) {
+			return '';
+		}
+	} else {
+		return '';
+	}
+
+	if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
+		return '';
+	}
+
+	$svg_markup = file_get_contents( $file_path );
+
+	if ( false === $svg_markup || '' === trim( $svg_markup ) ) {
+		return '';
+	}
+
+	$classes = is_array( $classes ) ? $classes : preg_split( '/\s+/', trim( (string) $classes ) );
+	$classes = array_filter( array_map( 'sanitize_html_class', $classes ) );
+
+	$svg_markup = preg_replace( '/<\?xml.*?\?>/i', '', $svg_markup );
+	$svg_markup = preg_replace_callback(
+		'/<svg\b([^>]*)>/i',
+		static function ( $matches ) use ( $classes, $width, $height ) {
+			$attributes = $matches[1];
+
+			if ( preg_match( '/\bclass=("|\')(.*?)(\1)/i', $attributes, $class_matches ) ) {
+				$existing_classes = preg_split( '/\s+/', trim( $class_matches[2] ) );
+				$all_classes      = array_unique( array_filter( array_merge( $existing_classes, $classes ) ) );
+				$attributes       = preg_replace( '/\bclass=("|\')(.*?)(\1)/i', 'class="' . esc_attr( implode( ' ', $all_classes ) ) . '"', $attributes, 1 );
+			} elseif ( ! empty( $classes ) ) {
+				$attributes .= ' class="' . esc_attr( implode( ' ', $classes ) ) . '"';
+			}
+
+			if ( ! preg_match( '/\baria-hidden=/i', $attributes ) ) {
+				$attributes .= ' aria-hidden="true"';
+			}
+
+			if ( ! preg_match( '/\bfocusable=/i', $attributes ) ) {
+				$attributes .= ' focusable="false"';
+			}
+
+			if ( '' !== $width ) {
+				if ( preg_match( '/\bwidth=("|\')(.*?)(\1)/i', $attributes ) ) {
+					$attributes = preg_replace( '/\bwidth=("|\')(.*?)(\1)/i', 'width="' . esc_attr( $width ) . '"', $attributes, 1 );
+				} else {
+					$attributes .= ' width="' . esc_attr( $width ) . '"';
+				}
+			}
+
+			if ( '' !== $height ) {
+				if ( preg_match( '/\bheight=("|\')(.*?)(\1)/i', $attributes ) ) {
+					$attributes = preg_replace( '/\bheight=("|\')(.*?)(\1)/i', 'height="' . esc_attr( $height ) . '"', $attributes, 1 );
+				} else {
+					$attributes .= ' height="' . esc_attr( $height ) . '"';
+				}
+			}
+
+			return '<svg' . $attributes . '>';
+		},
+		$svg_markup,
+		1
+	);
+
+	$allowed_svg_tags = array(
+		'svg'            => array(
+			'aria-hidden'         => true,
+			'class'               => true,
+			'data-name'           => true,
+			'fill'                => true,
+			'focusable'           => true,
+			'height'              => true,
+			'id'                  => true,
+			'preserveaspectratio' => true,
+			'role'                => true,
+			'stroke'              => true,
+			'stroke-width'        => true,
+			'viewbox'             => true,
+			'width'               => true,
+			'xmlns'               => true,
+			'xmlns:xlink'         => true,
+		),
+		'g'              => array(
+			'class'             => true,
+			'clip-path'         => true,
+			'data-name'         => true,
+			'fill'              => true,
+			'fill-rule'         => true,
+			'id'                => true,
+			'mask'              => true,
+			'opacity'           => true,
+			'stroke'            => true,
+			'stroke-linecap'    => true,
+			'stroke-linejoin'   => true,
+			'stroke-miterlimit' => true,
+			'stroke-width'      => true,
+			'transform'         => true,
+		),
+		'path'           => array(
+			'class'             => true,
+			'clip-rule'         => true,
+			'd'                 => true,
+			'fill'              => true,
+			'fill-rule'         => true,
+			'opacity'           => true,
+			'stroke'            => true,
+			'stroke-linecap'    => true,
+			'stroke-linejoin'   => true,
+			'stroke-miterlimit' => true,
+			'stroke-width'      => true,
+			'transform'         => true,
+		),
+		'circle'         => array(
+			'class'        => true,
+			'cx'           => true,
+			'cy'           => true,
+			'fill'         => true,
+			'opacity'      => true,
+			'r'            => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		),
+		'ellipse'        => array(
+			'class'        => true,
+			'cx'           => true,
+			'cy'           => true,
+			'fill'         => true,
+			'opacity'      => true,
+			'rx'           => true,
+			'ry'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		),
+		'line'           => array(
+			'class'          => true,
+			'stroke'         => true,
+			'stroke-linecap' => true,
+			'stroke-width'   => true,
+			'x1'             => true,
+			'x2'             => true,
+			'y1'             => true,
+			'y2'             => true,
+		),
+		'polygon'        => array(
+			'class'        => true,
+			'fill'         => true,
+			'opacity'      => true,
+			'points'       => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		),
+		'polyline'       => array(
+			'class'        => true,
+			'fill'         => true,
+			'opacity'      => true,
+			'points'       => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+		),
+		'rect'           => array(
+			'class'        => true,
+			'fill'         => true,
+			'height'       => true,
+			'opacity'      => true,
+			'rx'           => true,
+			'ry'           => true,
+			'stroke'       => true,
+			'stroke-width' => true,
+			'width'        => true,
+			'x'            => true,
+			'y'            => true,
+		),
+		'defs'           => array(),
+		'style'          => array(
+			'type' => true,
+		),
+		'clippath'       => array(
+			'id' => true,
+		),
+		'mask'           => array(
+			'id'        => true,
+			'maskunits' => true,
+			'x'         => true,
+			'y'         => true,
+			'width'     => true,
+			'height'    => true,
+		),
+		'lineargradient' => array(
+			'id' => true,
+			'x1' => true,
+			'x2' => true,
+			'y1' => true,
+			'y2' => true,
+		),
+		'radialgradient' => array(
+			'cx' => true,
+			'cy' => true,
+			'fx' => true,
+			'fy' => true,
+			'id' => true,
+			'r'  => true,
+		),
+		'stop'           => array(
+			'offset'       => true,
+			'stop-color'   => true,
+			'stop-opacity' => true,
+		),
+		'title'          => array(),
+		'desc'           => array(),
+		'use'            => array(
+			'href'       => true,
+			'width'      => true,
+			'height'     => true,
+			'x'          => true,
+			'xlink:href' => true,
+			'y'          => true,
+		),
+	);
+
+	return wp_kses( $svg_markup, $allowed_svg_tags );
+}
+
 add_shortcode(
 	'contact_address',
 	function () {
@@ -164,35 +483,49 @@ function social_icon_shortcode( $atts ) {
 		return '';
 	}
 
-	$social = get_field( 'socials', 'options' );
-	$urls   = array(
-		'facebook'    => $social['facebook_url'] ?? '',
-		'instagram'   => $social['instagram_url'] ?? '',
-		'x-twitter'   => $social['twitter_url'] ?? '',
-		'pinterest'   => $social['pinterest_url'] ?? '',
-		'youtube'     => $social['youtube_url'] ?? '',
-		'linkedin-in' => $social['linkedin_url'] ?? '',
+	$social     = get_field( 'socials', 'options' );
+	$social_map = array(
+		'facebook'  => array(
+			'url'   => $social['facebook_url'] ?? '',
+			'icon'  => 'facebook',
+			'label' => 'Facebook',
+		),
+		'instagram' => array(
+			'url'   => $social['instagram_url'] ?? '',
+			'icon'  => 'instagram',
+			'label' => 'Instagram',
+		),
+		'twitter'   => array(
+			'url'   => $social['twitter_url'] ?? '',
+			'icon'  => 'twitter-x',
+			'label' => 'X (Twitter)',
+		),
+		'linkedin'  => array(
+			'url'   => $social['linkedin_url'] ?? '',
+			'icon'  => 'linkedin',
+			'label' => 'LinkedIn',
+		),
+		'pinterest' => array(
+			'url'   => $social['pinterest_url'] ?? '',
+			'icon'  => 'pinterest',
+			'label' => 'Pinterest',
+		),
+		'youtube'   => array(
+			'url'   => $social['youtube_url'] ?? '',
+			'icon'  => 'youtube',
+			'label' => 'YouTube',
+		),
 	);
 
-	if ( ! isset( $urls[ $atts['type'] ] ) || empty( $urls[ $atts['type'] ] ) ) {
+	if ( ! isset( $social_map[ $atts['type'] ] ) || empty( $social_map[ $atts['type'] ]['url'] ) ) {
 		return '';
 	}
 
-	$url  = esc_url( $urls[ $atts['type'] ] );
-	$icon = esc_attr( $atts['type'] );
+	$url   = esc_url( $social_map[ $atts['type'] ]['url'] );
+	$icon  = esc_attr( $social_map[ $atts['type'] ]['icon'] );
+	$label = $social_map[ $atts['type'] ]['label'];
 
-	// Create readable label for accessibility.
-	$labels = array(
-		'facebook'    => 'Facebook',
-		'instagram'   => 'Instagram',
-		'x-twitter'   => 'X (Twitter)',
-		'pinterest'   => 'Pinterest',
-		'youtube'     => 'YouTube',
-		'linkedin-in' => 'LinkedIn',
-	);
-	$label  = $labels[ $atts['type'] ] ?? ucfirst( $atts['type'] );
-
-	return '<a href="' . $url . '" target="_blank" rel="nofollow noopener noreferrer" aria-label="' . esc_attr( $label ) . '"><i class="fa-brands fa-' . $icon . '" aria-hidden="true"></i></a>';
+	return '<a href="' . $url . '" target="_blank" rel="nofollow noopener noreferrer" aria-label="' . esc_attr( $label ) . '">' . lc_sanitise_svg( get_stylesheet_directory() . '/img/icons/' . $icon . '.svg' ) . '</a>';
 }
 
 // Register individual social icon shortcodes.
@@ -212,7 +545,9 @@ add_shortcode(
 	function ( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'class' => '',
+				'class'  => '',
+				'width'  => '32',
+				'height' => '32',
 			),
 			$atts,
 			'social_icons'
@@ -225,28 +560,37 @@ add_shortcode(
 
 		$icons      = array();
 		$social_map = array(
-			'twitter'   => 'x-twitter',
-			'facebook'  => 'facebook-f',
-			'instagram' => 'instagram',
-			'pinterest' => 'pinterest',
-			'youtube'   => 'youtube',
-			'linkedin'  => 'linkedin-in',
+			'twitter'   => array(
+				'icon'  => 'twitter-x',
+				'label' => 'X (Twitter)',
+			),
+			'facebook'  => array(
+				'icon'  => 'facebook',
+				'label' => 'Facebook',
+			),
+			'instagram' => array(
+				'icon'  => 'instagram',
+				'label' => 'Instagram',
+			),
+			'pinterest' => array(
+				'icon'  => 'pinterest',
+				'label' => 'Pinterest',
+			),
+			'youtube'   => array(
+				'icon'  => 'youtube',
+				'label' => 'YouTube',
+			),
+			'linkedin'  => array(
+				'icon'  => 'linkedin',
+				'label' => 'LinkedIn',
+			),
 		);
-
-		$labels = array(
-			'twitter'   => 'X (Twitter)',
-			'facebook'  => 'Facebook',
-			'instagram' => 'Instagram',
-			'pinterest' => 'Pinterest',
-			'youtube'   => 'YouTube',
-			'linkedin'  => 'LinkedIn',
-		);
-
 		foreach ( $social_map as $key => $icon ) {
 			if ( ! empty( $social[ $key . '_url' ] ) ) {
 				$url     = esc_url( $social[ $key . '_url' ] );
-				$label   = esc_attr( $labels[ $key ] );
-				$icons[] = '<a href="' . $url . '" target="_blank" rel="nofollow noopener noreferrer" aria-label="' . $label . '"><i class="fa-brands fa-' . $icon . '" aria-hidden="true"></i></a>';
+				$label   = esc_attr( $social_map[ $key ]['label'] );
+				$icon    = esc_attr( $social_map[ $key ]['icon'] );
+				$icons[] = '<a href="' . $url . '" target="_blank" rel="nofollow noopener noreferrer" aria-label="' . esc_attr( $label ) . '">' . lc_sanitise_svg( get_stylesheet_directory() . '/img/icons/' . $icon . '.svg', '', $atts['width'], $atts['height'] ) . '</a>';
 			}
 		}
 
@@ -451,32 +795,43 @@ add_action( 'send_headers', 'enable_strict_transport_security_hsts_header' );
  *                         a Font Awesome-style fa-ul/fa-li structure is used and
  *                         list bullets are suppressed. Default ''.
  *     @type string $class CSS class(es) added to each <li>. Default ''.
+ *     @type string $item_tag Item wrapper tag for each entry. Supported: li, span. Default 'li'.
  * }
  * @return string The HTML list items.
  */
 function lc_list( $field, array $options = array() ) {
 	$icon       = $options['icon'] ?? '';
 	$class      = $options['class'] ?? '';
+	$item_tag   = strtolower( (string) ( $options['item_tag'] ?? 'li' ) );
 	$class_attr = $class ? ' class="' . esc_attr( $class ) . '"' : '';
 
-	ob_start();
+	if ( ! in_array( $item_tag, array( 'li', 'span' ), true ) ) {
+		$item_tag = 'li';
+	}
+
+	$output  = array();
 	$field   = strip_tags( $field, '<br />' );
 	$bullets = preg_split( "/\r\n|\n|\r/", $field );
+
 	foreach ( $bullets as $b ) {
 		if ( '' === $b ) {
 			continue;
 		}
+
+		$item_content = esc_html( $b );
+
 		if ( $icon ) {
-			?>
-<li<?php echo $class_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><span class="fa-li"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span><?php echo esc_html( $b ); ?></li>
-			<?php
-		} else {
-			?>
-<li<?php echo $class_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $b ); ?></li>
-			<?php
+			if ( 'li' === $item_tag ) {
+				$item_content = '<span class="fa-li">' . $icon . '</span>' . $item_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			} else {
+				$item_content = $icon . $item_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
 		}
+
+		$output[] = '<' . $item_tag . $class_attr . '>' . $item_content . '</' . $item_tag . '>';
 	}
-	return ob_get_clean();
+
+	return implode( '', $output );
 }
 
 /**

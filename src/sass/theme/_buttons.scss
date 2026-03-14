@@ -21,7 +21,7 @@
 }
 
 .button {
-  --_bg: var(--col-brand-navy);
+  --_bg: var(--col-green-primary);
   --_fg: var(--col-white);
 
   display: inline-block;
@@ -29,8 +29,7 @@
   font-family: var(--ff-body);
   font-size: var(--fs-300);
   font-weight: var(--fw-semibold);
-  text-transform: uppercase;
-  padding: 0.25rem 1.5rem;
+  padding: 0.5rem 1.75rem;
   color: var(--_fg);
   border: 2px solid var(--_bg);
   transition:
@@ -59,14 +58,9 @@
     }
   }
 
-  &.button-accent {
-    --_bg: var(--col-accent-orange);
-    --_fg: var(--col-white);
-  }
-
   &.button-white {
     --_bg: var(--col-white);
-    --_fg: var(--col-brand-navy);
+    --_fg: var(--col-green-primary);
     &:hover {
       color: var(--_fg);
       background-color: color-mix(in srgb, var(--_bg), var(--col-black) 10%);

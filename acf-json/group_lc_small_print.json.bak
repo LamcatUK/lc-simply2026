@@ -1,0 +1,23 @@
+{
+  "key": "group_lc_small_print",
+  "title": "LC Small Print",
+  "fields": [
+    {
+      "key": "field_lc_small_print_title",
+      "label": "LC Small Print",
+      "name": "title",
+      "type": "message"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-small-print"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": ""
+}

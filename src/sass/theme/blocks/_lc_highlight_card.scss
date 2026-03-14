@@ -1,0 +1,9 @@
+.lc-highlight-card {
+  &__card {
+    background-color: var(--col-white);
+    border-radius: var(--radius-100);
+    border-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 1rem 1.5rem;
+  }
+}

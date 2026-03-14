@@ -51,7 +51,7 @@ h1,
   font-size: var(--fs-900);
   line-height: var(--lh-900);
   font-style: normal;
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
 }
 
 h2,
@@ -76,14 +76,22 @@ h4,
 
 .fw-500,
 strong {
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
 }
 
-.w-short {
+.ch-85 {
+  max-width: 85ch;
+}
+
+.ch-75 {
+  max-width: 75ch;
+}
+
+.ch-65 {
   max-width: 65ch;
 }
 
-.w-short-45 {
+.ch-45 {
   max-width: 45ch;
 }
 

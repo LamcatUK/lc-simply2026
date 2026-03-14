@@ -1,0 +1,78 @@
+{
+  "key": "group_lc_highlight_card",
+  "title": "LC Highlight Card",
+  "fields": [
+    {
+      "key": "field_lc_highlight_card_title",
+      "label": "LC Highlight Card",
+      "name": "title",
+      "type": "message"
+    },
+    {
+      "key": "field_lc_highlight_card_package_name_233e8e86",
+      "label": "Package Name",
+      "name": "package_name",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    },
+    {
+      "key": "field_lc_highlight_card_package_description_10f3018a",
+      "label": "Package Description",
+      "name": "package_description",
+      "type": "textarea",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "rows": 4,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_lc_highlight_card_package_price_586ae3bb",
+      "label": "Package Price",
+      "name": "package_price",
+      "type": "text",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "block",
+        "operator": "==",
+        "value": "acf/lc-highlight-card"
+      }
+    ]
+  ],
+  "active": 1,
+  "description": "",
+  "modified": 1773499082
+}

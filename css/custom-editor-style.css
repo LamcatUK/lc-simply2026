@@ -6,10 +6,12 @@
   --col-green-primary: #7f9b89;
   --col-green-muted: #8fa89a;
   --col-neutral-light: #faf7f4;
+  --col-neutral-mid: #f6f3f1;
   --col-neutral-muted: #f2eeec;
+  --col-neutral-dark: #666;
   /* font families */
-  --ff-heading: Inter, sans-serif, serif;
-  --ff-body: Inter, sans-serif, serif;
+  --ff-heading: "Playfair Display", sans-serif, serif;
+  --ff-body: "Source Sans 3", sans-serif, serif;
   /* =========================
      Font weights
   ========================== */
@@ -25,26 +27,26 @@
   /* Hero H1 */
   --fs-900: clamp(2.2rem, 4vw, 3.5rem);
   --lh-900: 1.1;
-  /* Section H2 */
-  --fs-800: clamp(1.6rem, 2.5vw, 2.2rem);
+  /* Section H2 (40px → 56px) */
+  --fs-800: clamp(2.222rem, 3.8vw, 3.111rem);
   --lh-800: 1.2;
-  /* Subheading / Large intro */
-  --fs-700: clamp(1.25rem, 1.6vw, 1.5rem);
+  /* Subheading / Large intro (28px → 40px) */
+  --fs-700: clamp(1.556rem, 2.8vw, 2.222rem);
   --lh-700: 1.35;
-  /* Card titles / H3 */
-  --fs-600: clamp(1.1rem, 1.2vw, 1.25rem);
+  /* Card titles / H3 (22px → 28px) */
+  --fs-600: clamp(1.222rem, 2vw, 1.556rem);
   --lh-600: 1.35;
-  /* Body large */
-  --fs-500: clamp(1rem, 1vw, 1.125rem);
+  /* Body large (18px → 22px) */
+  --fs-500: clamp(1rem, 1.5vw, 1.222rem);
   --lh-500: 1.6;
-  /* Body standard */
-  --fs-400: clamp(0.95rem, 0.9vw, 1rem);
+  /* Body standard (18px → 20px) */
+  --fs-400: clamp(1rem, 0.95vw, 1.111rem);
   --lh-400: 1.6;
-  /* Small text */
-  --fs-300: clamp(0.85rem, 0.8vw, 0.9rem);
+  /* Small text (14px → 16px) */
+  --fs-300: clamp(0.778rem, 0.85vw, 0.889rem);
   --lh-300: 1.5;
-  /* Micro / meta / legal */
-  --fs-200: clamp(0.75rem, 0.7vw, 0.8rem);
+  /* Micro / meta / legal (13px → 14px) */
+  --fs-200: clamp(0.722rem, 0.75vw, 0.778rem);
   --lh-200: 1.4;
   /* =========================
      Utility tracking
@@ -84,8 +86,8 @@
     rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   --transition: 200ms ease-in;
   --fa-li-margin: 1.5rem;
-  --h-top-mobile: 70px;
-  --h-top: 70px;
+  --h-top-mobile: 0px;
+  --h-top: 0px;
 }
 
 *,
