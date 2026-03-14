@@ -12,12 +12,10 @@ defined('ABSPATH') || exit;
 get_header();
 ?>
 <main id="main">
-	<div class="container py-5">
-		<?php
-		the_post();    
-		the_content(); 
-		?>
-	</div>
+	<?php
+	the_post();    
+	the_content(); 
+	?>
 </main>
 <?php
 get_footer();

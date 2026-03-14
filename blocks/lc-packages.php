@@ -55,5 +55,11 @@ if ( $packages_count > 0 && 0 === $packages_count % 3 ) {
 			}
 			?>
 		</div>
+		<?php
+		if ( get_field( 'lc_packages_button' ) ) {
+			$button = get_field( 'lc_packages_button' );
+			echo '<div class="text-center"><a href="' . esc_url( $button['url'] ) . '" class="button button-primary">' . esc_html( $button['title'] ) . '</a></div>';
+		}
+		?>
 	</div>
 </section>
