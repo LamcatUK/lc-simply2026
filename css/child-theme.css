@@ -20646,6 +20646,13 @@ footer .colophon a {
   margin-right: 0.75rem;
   opacity: 0.6;
 }
+@media (max-width: 575.98px) {
+  .lc-small-print__description > span:first-child::before {
+    content: "•";
+    margin-right: 0.75rem;
+    opacity: 0.6;
+  }
+}
 
 .lc-divider .lc-divider__inner {
   display: flex;

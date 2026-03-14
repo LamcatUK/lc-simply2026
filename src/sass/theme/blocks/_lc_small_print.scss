@@ -26,4 +26,12 @@
     margin-right: 0.75rem;
     opacity: 0.6;
   }
+
+  @media (max-width: 575.98px) {
+    &__description > span:first-child::before {
+      content: "•";
+      margin-right: 0.75rem;
+      opacity: 0.6;
+    }
+  }
 }

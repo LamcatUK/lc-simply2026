@@ -16,7 +16,7 @@ $extra      = $block['className'] ?? 'py-5';
 ?>
 <section class="lc-contact <?= esc_attr( trim( $bg . ' ' . $fg . ' ' . $extra ) ); ?>" id="<?= esc_attr( $section_id ); ?>">
 	<div class="container">
-		<div class="row">
+		<div class="row gy-5">
 			<div class="col-md-6">
 				<h2><?= esc_html( get_field( 'title' ) ); ?></h2>
 				<div class="mb-4"><?= wp_kses_post( get_field( 'content' ) ); ?></div>
