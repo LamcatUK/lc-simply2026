@@ -57,8 +57,9 @@ if ( $packages_count > 0 && 0 === $packages_count % 3 ) {
 		</div>
 		<?php
 		if ( get_field( 'lc_packages_button' ) ) {
+			++$stagger_index;
 			$button = get_field( 'lc_packages_button' );
-			echo '<div class="text-center"><a href="' . esc_url( $button['url'] ) . '" class="button button-primary">' . esc_html( $button['title'] ) . '</a></div>';
+			echo '<div class="text-center" data-aos="fade" data-aos-delay="0" data-stagger-index="' . esc_attr( $stagger_index ) . '"><a href="' . esc_url( $button['url'] ) . '" class="button button-primary">' . esc_html( $button['title'] ) . '</a></div>';
 		}
 		?>
 	</div>
