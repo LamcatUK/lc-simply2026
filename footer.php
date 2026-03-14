@@ -17,12 +17,18 @@ defined( 'ABSPATH' ) || exit;
 				<img src="<?= esc_url( get_stylesheet_directory_uri() . '/img/simply-assist-logo.svg' ); ?>" alt="Simply Assist Logo" class="mb-3" width="300">
 			</div>
 			<div class="col-md-4">
-				<div class="mb-2"><i class="bi bi-telephone-fill"></i>
-					<?= do_shortcode( '[contact_phone]' ); ?>
-				</div>
 				<div class="mb-2"><i class="bi bi-send-fill"></i>
 					<?= do_shortcode( '[contact_email]' ); ?>
 				</div>
+				<?php
+				if ( get_field( 'contact_phone', 'option' ) ) {
+					?>
+				<div class="mb-2"><i class="bi bi-telephone-fill"></i>
+					<?= do_shortcode( '[contact_phone]' ); ?>
+				</div>
+					<?php
+				}
+				?>
 			</div>
 			<div class="col-md-4">
 				<?php
