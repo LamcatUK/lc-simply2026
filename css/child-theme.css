@@ -20464,6 +20464,7 @@ footer .colophon a {
   min-height: 80svh;
   padding-top: 160px;
   isolation: isolate;
+  position: relative;
 }
 .lc-hero .overlay {
   position: absolute;
